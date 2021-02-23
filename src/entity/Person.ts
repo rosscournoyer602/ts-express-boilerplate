@@ -8,5 +8,5 @@ export class Person {
   id!: number;
 
   @Column('text', { nullable: true })
-	first_name?: string;
+  first_name?: string;
 }
