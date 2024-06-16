@@ -1,9 +1,9 @@
-import { RequestHandler,Request, Response, NextFunction } from 'express'
-import passport from 'passport'
-import './passportConfig'
+import { RequestHandler, Request, Response, NextFunction } from "express";
+import passport from "passport";
+import "./passportConfig";
 
 export function signIn(req: Request, res: Response, next: NextFunction) {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate("local", (err: any, user: any, info: any) => {
     if (err) {
       res.status(401).json({ status: "error", code: "Unauthorized" });
     }
@@ -12,11 +12,11 @@ export function signIn(req: Request, res: Response, next: NextFunction) {
     } else {
       next();
     }
-  })(req, res, next)
+  })(req, res, next);
 }
 
 export function checkToken(req: Request, res: Response, next: NextFunction) {
-  passport.authenticate('jwt', (err, user, info) => {
+  passport.authenticate("jwt", (err: any, user: any, info: any) => {
     if (err) {
       res.status(401).json({ status: "error", code: "Unauthorized" });
     }
@@ -25,5 +25,5 @@ export function checkToken(req: Request, res: Response, next: NextFunction) {
     } else {
       next();
     }
-  })(req, res, next)
+  })(req, res, next);
 }
