@@ -1,9 +1,26 @@
-Express server using TypeORM, and Passport.js JWT authentication
+# Express server using TypeORM, and Passport.js JWT authentication
 
-    npm install
+### Getting started
 
-Edit the default.ormconfig.json file. Configure TypeORM to connect with your DB instance.
-Make an env file based on default.env. Should change the secret.
+1.  In the root project directory, from the command line, create default environment variables
 
-	npm run build
-	npm start
+        cp default.env .env
+
+2.  In the .env file, change the secret for JWT authorization if needed
+
+        APP_PORT=8080
+        APP_SECRET=supersecret
+
+        POSTGRESDB_HOST=localhost
+        POSTGRESDB_USER=tsboilerplate
+        POSTGRESDB_ROOT_PASSWORD=tsboilerplate
+        POSTGRESDB_DATABASE=tsboilerplate
+        POSTGRESDB_LOCAL_PORT=5432
+        POSTGRESDB_DOCKER_PORT=5432
+
+        NODE_LOCAL_PORT=8080
+        NODE_DOCKER_PORT=8080
+
+3.  Run with docker
+
+        docker-compose up

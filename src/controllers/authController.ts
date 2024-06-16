@@ -12,7 +12,7 @@ function tokenForUser(userEmail: string) {
   const timestamp = new Date().getTime() / 1000;
   return jwt.encode(
     { sub: userEmail, iat: timestamp },
-    process.env.APP_SECRET || "bananas"
+    process.env.APP_SECRET || "secret"
   );
 }
 

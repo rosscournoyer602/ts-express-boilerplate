@@ -43,7 +43,7 @@ passport.use(
 );
 
 const params = {
-  secretOrKey: process.env.APP_SECRET || "bananas",
+  secretOrKey: process.env.APP_SECRET || "secret",
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
