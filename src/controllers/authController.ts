@@ -19,7 +19,7 @@ function tokenForUser(userEmail: string) {
 @controller("")
 class AuthController {
   @post("/signup")
-  @use(bodyValidator(["email, password, confirmPassword"]))
+  @use(bodyValidator(["email", "password", "confirmPassword"]))
   async signup(req: Request, res: Response) {
     const { email } = req.body;
     const userRepo = getRepository(AuthUser);
@@ -29,7 +29,7 @@ class AuthController {
       res.status(422).send("Passwords do not match");
     }
     if (user) {
-      res.status(409).send(`User already exists with id: ${email}`);
+      res.status(422).send(`User already exists with id: ${email}`);
     } else {
       try {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
