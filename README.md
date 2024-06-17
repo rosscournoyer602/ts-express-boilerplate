@@ -24,3 +24,5 @@
 3.  Run with docker
 
         docker-compose up
+
+4.  Use Postman to import the `TSED.postman_collection.json` file at the root directory for some sample requests
