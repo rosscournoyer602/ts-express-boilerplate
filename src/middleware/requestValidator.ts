@@ -1,19 +1,19 @@
-import { RequestHandler,Request, Response, NextFunction } from 'express'
-import { runInNewContext } from 'vm'
+import { RequestHandler, Request, Response, NextFunction } from "express";
+import { runInNewContext } from "vm";
 
 export function bodyValidator(keys: string[]): RequestHandler {
-  return function(req: Request, res: Response, next: NextFunction) {
+  return function (req: Request, res: Response, next: NextFunction) {
     if (!req.body) {
-      res.status(422).send('Invalid Request')
-      return
+      res.status(422).send("Missing request body");
+      return;
     }
 
-    for(let key of keys) {
+    for (let key of keys) {
       if (!req.body[key]) {
-        res.status(422).send('Invalid Request')
+        res.status(422).send(`Invalid Request: ${req.body}`);
       }
-      return
+      return;
     }
-    next()
-  }
+    next();
+  };
 }

@@ -34,7 +34,7 @@ class AuthController {
       try {
         bcrypt.hash(req.body.password, 10, async (err, hash) => {
           if (err) {
-            res.status(500).send("An unexpected error has occured");
+            res.status(500).send("bcrypt: An unexpected error has occured");
           }
           const newPerson = await personRepo.save({});
           await userRepo.save({
@@ -47,7 +47,7 @@ class AuthController {
           });
         });
       } catch (err) {
-        res.status(500).send("An unexpected error has occured");
+        res.status(500).send("bcrypt: An unexpected error has occured");
       }
     }
   }

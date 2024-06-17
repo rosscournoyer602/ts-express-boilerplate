@@ -1,12 +1,10 @@
-import { Request, Response } from 'express';
-import { get, controller, use } from './decorators';
+import { Request, Response } from "express";
+import { get, controller, use } from "./decorators";
 
-@controller('')
+@controller("")
 class RootController {
-
-  @get('/')
-  getRoot (req: Request, res: Response) {
-    res.send('Hello!');
+  @get("/")
+  getRoot(req: Request, res: Response) {
+    res.send("Hello!");
   }
-
 }
