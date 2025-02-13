@@ -8,6 +8,7 @@ import { createConnections } from "typeorm";
 import "./controllers/rootController";
 import "./controllers/authController";
 import "./controllers/personController";
+const { JogooClient, JogooInstall } = require("jogoo");
 
 createConnections([
   {
@@ -28,6 +29,20 @@ createConnections([
     },
   },
 ]).then(() => {
+  (async () => {
+    let dbConfig = {
+      dialect: "postgres",
+      user: process.env.POSTGRESDB_USER,
+      host: process.env.POSTGRESDB_HOST,
+      database: process.env.POSTGRESDB_DATABASE,
+      password: process.env.POSTGRESDB_ROOT_PASSWORD,
+    };
+    let jogooClient = new JogooClient(dbConfig);
+    await jogooClient.connect();
+    // const jogooInstall = new JogooInstall(jogooClient);
+    // await jogooInstall.do();
+    // jogooClient.end();
+  })();
   const app = express();
   app.use(cors());
   app.use(morgan("combined"));
