@@ -8,6 +8,8 @@ import { createConnections } from "typeorm";
 import "./controllers/rootController";
 import "./controllers/authController";
 import "./controllers/personController";
+import "./controllers/categoryController";
+import "./controllers/productController";
 const { JogooClient, JogooInstall } = require("jogoo");
 
 createConnections([

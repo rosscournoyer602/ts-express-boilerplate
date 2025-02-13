@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { get, controller, use } from "./decorators";
+import { get, controller } from "./decorators";
 
 @controller("")
 class RootController {
