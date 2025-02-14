@@ -1,29 +1,47 @@
 import { Request, Response } from "express";
 import { get, post, controller } from "./decorators";
-import { getConnection, getRepository } from "typeorm";
-import { Person } from "../entity/Person";
 import { Category } from "../entity/Category";
+import { dataSource } from "../server";
 
 @controller("")
 class CategoryController {
   @get("/categories")
   async getAllCategories(req: Request, res: Response) {
-    const categories = await getConnection("default").manager.find(Category);
+    const categoryRepository = dataSource.getRepository(Category);
+    const categories = await categoryRepository.find({
+      select: {
+        id: true,
+        name: true,
+      },
+      relations: {
+        products: true,
+      },
+    });
     res.send(categories);
   }
 
   @get("/category")
   async getCategory(req: Request, res: Response) {
-    const id = req.query.id as string;
-    const category = await getRepository(Category).findOne(id);
+    const categoryRepository = dataSource.getRepository(Category);
+    const id = parseInt(req.query.id as string, 10);
+    const category = await categoryRepository.findOne({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+      },
+      relations: {
+        products: true,
+      },
+    });
     res.send(category);
   }
 
   @post("/categories/bulk")
   async BulkInsertCategories(req: Request, res: Response) {
-    const categoryRepo = getRepository(Category);
+    const categoryRepository = dataSource.getRepository(Category);
     const { categories } = req.body;
-    await categoryRepo.save(categories);
+    await categoryRepository.save(categories);
     res.send(categories);
   }
 }

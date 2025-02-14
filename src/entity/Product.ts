@@ -1,5 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 import { Category } from "../entity/Category";
+import { Transaction } from "./Transaction";
+
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
@@ -7,10 +15,16 @@ export class Product {
 
   @Column("text")
   name!: string;
+
   @Column("text")
   description!: string;
+
   @Column("text")
   image_url!: string;
-  @ManyToOne(() => Category, (category) => category.products)
+
+  @ManyToOne(() => Category, (category) => category.id)
   category!: Category;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.product)
+  transactions!: Transaction[];
 }
